@@ -1,0 +1,31 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id             Int            @id @default(autoincrement())
+  name           String
+  password       String
+  contactInfo    String
+  verifications  Verification[] @relation("UserVerifications")
+}
+
+model Verification {
+  id          Int     @id @default(autoincrement())
+  requester   User    @relation("UserVerifications", fields: [requesterId], references: [id])
+  requesterId Int
+  requestedTo String  @unique
+  status      Status  @default(PENDING)
+  request     String
+}
+
+enum Status {
+  PENDING
+  REJECTED
+  ACCEPTED
+}
