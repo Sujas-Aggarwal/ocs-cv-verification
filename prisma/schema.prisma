@@ -19,7 +19,7 @@ model Verification {
   id          Int     @id @default(autoincrement())
   requester   User    @relation("UserVerifications", fields: [requesterId], references: [id])
   requesterId Int
-  requestedTo String  @unique
+  requestedTo String  
   status      Status  @default(PENDING)
   request     String
 }

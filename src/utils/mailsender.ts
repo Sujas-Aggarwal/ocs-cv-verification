@@ -6,27 +6,32 @@ export async function sendVerificationEmail(
   requestText: string,
   verificationId: number
 ) {
-  try {
-    // Create a Nodemailer transporter
-    const transporter = nodemailer.createTransport({
-      service: process.env.EMAIl_PROVIDER, // Change based on your provider
-      auth: {
-        user: process.env.EMAIL_USER, // Your email
-        pass: process.env.EMAIL_PASS, // App password (if using Gmail)
-      },
-    });
+  let tries = 1;
+  do {
+    try {
+      // Create a Nodemailer transporter
+      const transporter = nodemailer.createTransport({
+        service: process.env.EMAIL_PROVIDER, // Change based on your provider
+        host:process.env.EMAIL_PROVIDER,
+        port:587,
+        secure: false, // Use `true` for port 465
+        auth: {
+          user: process.env.EMAIL_USER, // Your email
+          pass: process.env.EMAIL_PASS, // App password (if using Gmail)
+        },
+      });
 
-    // Construct approval and rejection links
-    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
-    const approveLink = `${baseUrl}/api/verifications/approve?verificationId=${verificationId}`;
-    const rejectLink = `${baseUrl}/api/verifications/reject?verificationId=${verificationId}`;
+      // Construct approval and rejection links
+      const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+      const approveLink = `${baseUrl}/api/verifications/approve?verificationId=${verificationId}`;
+      const rejectLink = `${baseUrl}/api/verifications/reject?verificationId=${verificationId}`;
 
-    // Email content
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: recipientEmail,
-      subject: "Student Verification Request",
-      html: `
+      // Email content
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: recipientEmail,
+        subject: "Student Verification Request",
+        html: `
         <h2>Verification Request from ${requesterName}</h2>
         <p><strong>Request Details:</strong> ${requestText}</p>
         <p>Please approve or reject the verification request:</p>
@@ -34,14 +39,20 @@ export async function sendVerificationEmail(
         &nbsp;
         <a href="${rejectLink}" style="display: inline-block; padding: 10px 20px; background-color: red; color: white; text-decoration: none; border-radius: 5px;">Reject</a>
       `,
-    };
+      };
 
-    // Send the email
-    const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent: " + info.messageId);
-    return { success: true, message: "Email sent successfully" };
-  } catch (error) {
-    console.error("Error sending email:", error);
-    return { success: false, message: "Failed to send email" };
-  }
+      // Send the email
+      const info = await transporter.sendMail(mailOptions);
+      console.log("Email sent: " + info.messageId);
+      return { success: true, message: "Email sent successfully" };
+    } catch (error) {
+      console.error("Error sending email:", error);
+      if (tries<2){
+        tries++;
+      }
+      else{
+        return { success: false, message: "Failed to send email" };
+      }
+    }
+  } while (true);
 }

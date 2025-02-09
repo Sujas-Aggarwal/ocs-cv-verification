@@ -88,13 +88,25 @@ export async function POST(req: NextRequest) {
         request,
       },
     });
-    sendVerificationEmail(
+    const mailSender = await sendVerificationEmail(
       requestedTo,
       userCookie.value,
       request,
       verification.id
     );
-    return NextResponse.json({ message: "Success", verification });
+    if (mailSender.success) {
+      return NextResponse.json({ message: "Success", verification });
+    } else {
+      await prisma.verification.delete({
+        where: {
+          id: verification.id,
+        },
+      });
+      return NextResponse.json(
+        { message: "Error Sending Mail, Please try later" },
+        { status: 500 }
+      );
+    }
   } catch (error) {
     console.error(error);
     return NextResponse.json(
