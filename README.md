@@ -1,36 +1,194 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Verification System (PVS)
+
+Well, this is a system to hopefully solve the issue of fake research internships and projects which students submit by adding a layer of security by directly asking the professor or superior in question via administrative mail to serve as an official proof of the experience.
+Thanks for reading, I would be delighted if you could contribute in it!
+
+This project is a project and internships verification system built using Next.js and nodemailer.
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Running the Application](#running-the-application)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Introduction
+
+The OCS CV Verification system is designed to verify the credentials and information provided in CVs. It leverages the power of Next.js for the frontend and backend, and Docker Compose for containerization.
+
+## Features
+
+- CV verification
+- User authentication
+- Admin dashboard
+- API integration
+
+## Technologies Used
+
+- Next.js
+- Docker
+- Docker Compose
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Make sure you have the following installed on your system:
+
+- Docker
+- Docker Compose
+
+### Installation
+
+1. Clone the repository:
+
+     ```sh
+     git clone https://github.com/your-username/ocs-cv-verification.git
+     cd ocs-cv-verification
+     ```
+
+2. Install dependencies:
+
+     ```sh
+     npm install
+     ```
+
+### Running the Application
+
+1. Build and start the Docker containers:
+
+     ```sh
+     docker-compose up --build
+     ```
+
+2. Open your browser and navigate to `http://localhost:3000`.
+
+## Project Structure
+
+```
+.
+├── .next
+├── components
+├── pages
+│   ├── api
+│   ├── index.js
+│   └── ...
+├── public
+├── styles
+├── docker-compose.yml
+├── Dockerfile
+├── package.json
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contributing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) first.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.# OCS CV Verification
 
-To learn more about Next.js, take a look at the following resources:
+This project is a CV verification system built using Next.js and Dockerized using Docker Compose.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Table of Contents
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Introduction](#introduction)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Running the Application](#running-the-application)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Deploy on Vercel
+## Introduction
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The OCS CV Verification system is designed to verify the credentials and information provided in CVs. It leverages the power of Next.js for the frontend and backend, and Docker Compose for containerization.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Features
+
+- CV verification
+- User authentication
+- Admin dashboard
+- API integration
+
+## Technologies Used
+
+- Next.js
+- Docker
+- Docker Compose
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed on your system:
+
+- Docker
+- Docker Compose
+
+### Installation
+
+1. Clone the repository:
+
+     ```sh
+     git clone https://github.com/your-username/ocs-cv-verification.git
+     cd ocs-cv-verification
+     ```
+
+2. Install dependencies: (OPTIONAL)
+
+     ```sh
+     npm install
+     ```
+
+3. Make an .env file or modify docker-compose with your credentials for sql database and email and passwords
+
+### Running the Application
+
+1. Build and start the Docker containers:
+
+     ```sh
+     docker-compose up --build
+     ```
+
+2. Open your browser and navigate to `http://localhost:3000`.
+
+## Project Structure
+
+```
+.
+├── .next
+├── components
+├── pages
+│   ├── api
+│   ├── index.js
+│   └── ...
+├── public
+├── styles
+├── docker-compose.yml
+├── Dockerfile
+├── package.json
+└── README.md
+```
+
+## Contributing
+Contributions are welcome!
+
+### TODOs:
+- Implement JSW Tokens and password hashing.
+- Docker Image Implementation
+- Improve Frontend
+- Admin Panel Integration
+- Pre-approved email address only
+- Improved mail template
+- Improved mail accept and reject website
