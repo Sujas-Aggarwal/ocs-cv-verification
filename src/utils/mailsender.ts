@@ -11,8 +11,7 @@ export async function sendVerificationEmail(
     try {
       // Create a Nodemailer transporter
       const transporter = nodemailer.createTransport({
-        service: process.env.EMAIL_PROVIDER, // Change based on your provider
-        host:process.env.EMAIL_PROVIDER,
+        host:process.env.EMAIL_PROVIDER || "smtp.gmail.com",
         port:587,
         secure: false, // Use `true` for port 465
         auth: {
@@ -48,6 +47,7 @@ export async function sendVerificationEmail(
     } catch (error) {
       console.error("Error sending email:", error);
       if (tries<2){
+        await new Promise((resolve)=> setTimeout(resolve, (2*tries+1)*2000));
         tries++;
       }
       else{

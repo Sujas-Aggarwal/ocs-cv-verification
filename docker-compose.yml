@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql-container
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: ocs_cv_verification
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  nextjs:
+    build: .
+    container_name: nextjs-container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE_URL=mysql://myuser:mypassword@mysql:3306/ocs_cv_verification
+      - SMTP_PORT=587 # ✅ Define SMTP port if needed
+      - EMAIL_USER=
+      - EMAIL_PASS=
+      - EMAIl_PROVIDER=smtp.gmail.com
+      - SMTP_PROVIDER=smtp.gmail.com
+      - SMTP_PORT=587
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: ["/bin/sh", "-c", "./prisma-migrate.sh && npm start"]
+
+volumes:
+  mysql_data:
