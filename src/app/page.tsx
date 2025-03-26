@@ -2,10 +2,11 @@ import Link from "next/link";
 
 export default function App() {
   return (
-    <div className="relative flex items-center justify-center h-screen bg-gradient-to-br from-[#1e3c72] to-[#2a5298] overflow-hidden">
+    <div className="relative flex items-center justify-center h-screen bg-gradient-to-br from-[#12264d] to-[#2a5298] overflow-hidden">
       {/* Background SVG Wave */}
+      
       <svg
-        className="absolute top-0 left-0 w-full h-full opacity-50"
+        className="absolute top-0 left-0 w-full h-full opacity-0"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1440 320"
       >
